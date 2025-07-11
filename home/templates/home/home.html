@@ -1,0 +1,57 @@
+{% extends "global/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <div class="calculator-card">
+        <h1>КАЛЬКУЛЯТОР ВЫЧИСЛЕНИЯ ОЧКОВ ЗА ПОПАДАНИЕ В КЛАССИЧЕСКОМ СНАЙПИНГЕ</h1>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                {{ form.target.label_tag }}
+                {{ form.target }}
+            </div>
+            <div class="form-group">
+                {{ form.dist.label_tag }}
+                {{ form.dist }}
+            </div>
+            <div class="buttons">
+                <button type="submit" class="btn btn-primary">Рассчитать</button>
+                <button type="submit" name="clear" class="btn btn-danger">Очистить историю</button>
+            </div>
+        </form>
+    </div>
+
+    {% if recent_tables %}
+    <div class="history-card">
+        <h2>История расчетов</h2>
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Цель (см)</th>
+                        <th>Дистанция (м)</th>
+                        <th>1-й выстрел</th>
+                        <th>2-й выстрел</th>
+                        <th>3-й выстрел</th>
+                        <th>MRAD</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in recent_tables %}
+                    <tr>
+                        <td>{{ item.table.target }}</td>
+                        <td>{{ item.table.dist }}</td>
+                        <td>{{ item.table.first_try }}</td>
+                        <td>{{ item.table.second_try }}</td>
+                        <td>{{ item.table.third_try }}</td>
+                        <td>{{ item.table.mrad }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
