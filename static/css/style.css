@@ -27,14 +27,21 @@ body::before {
     filter: blur(5px);
     z-index: -1;
 }
+
+main {
+    flex-grow: 1;
+}
+
+/* Main container for content */
 .container {
     width: 100%;
     max-width: 960px;
     margin: 0 auto;
-    flex-grow: 1;
     padding: 20px;
     box-sizing: border-box;
 }
+
+/* Card styles */
 .calculator-card, .history-card {
     background-color: rgba(255, 255, 255, 0);
     border-radius: 15px;
@@ -47,8 +54,12 @@ h1, h2 {
     text-align: center;
     color: #2c3e50;
 }
+h1 {
+    font-size: clamp(1.6rem, 5vw, 2.8rem);
+    line-height: 1.2;
+}
 h2 {
-    padding-left: 100px;
+    /* padding-left: 100px; */ /* Removed harmful padding */
 }
 form {
     display: flex;
@@ -59,7 +70,7 @@ form {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: left;
+    justify-content: flex-start;
     gap: 1rem;
     opacity: 0;
 }
@@ -90,7 +101,7 @@ form {
     gap: 1rem;
     justify-content: center;
     flex-wrap: wrap;
-    padding-left: 100px;
+    /* padding-left: 100px; */ /* Removed harmful padding */
     opacity: 0;
 }
 .btn {
@@ -266,12 +277,18 @@ tbody tr:hover {
         padding: 15px 0;
     }
 }
+/* For mobile phones */
 @media (max-width: 480px) {
     body {
         padding: 0;
     }
     .container {
         padding: 10px 15px;
+    }
+    .form-group {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
     }
     .calculator-card, .history-card {
         padding: 1rem;
