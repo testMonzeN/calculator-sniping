@@ -9,7 +9,7 @@ class Table(models.Model):
     second_try = models.CharField(max_length=100)
     third_try = models.CharField(max_length=100)
 
-    mrad = models.CharField(max_length=100)
+    mrad = models.FloatField(max_length=100)
 
 
 class TableIpAddressSort(models.Model):
