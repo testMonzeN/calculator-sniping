@@ -39,7 +39,7 @@ class Calculator():
         try:
             return round_half_up(self.resurt_one_try() * 0.5, 2)
         except:
-            return 'Вы не попали в диапазон МРАД'
+            return 'Вы не попали в допустимый диапазон'
 
     def result_MRAD(self):
         try:

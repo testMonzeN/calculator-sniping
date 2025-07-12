@@ -47,7 +47,7 @@
                         <td {% if "Вы не попали" in item.table.first_try|stringformat:"s" %}class="mrad-error"{% else %}class="mrad-success"{% endif %}>{{ item.table.first_try }}</td>
                         <td {% if "Вы не попали" in item.table.second_try|stringformat:"s" %}class="mrad-error"{% else %}class="mrad-success"{% endif %}>{{ item.table.second_try }}</td>
                         <td {% if "Вы не попали" in item.table.third_try|stringformat:"s" %}class="mrad-error"{% else %}class="mrad-success"{% endif %}>{{ item.table.third_try }}</td>
-                        <td {% if item.table.mrad >= 0.2 and item.table.mrad <= 0.7 %}class="mrad-critical-success"{% else %}class="mrad-critical-error"{% endif %}>{{ item.table.mrad }}</td>                    
+                        <td {% if item.table.mrad >= 0.2 and item.table.mrad <= 0.7 %}class="mrad-success"{% else %}class="mrad-critical-error"{% endif %}>{{ item.table.mrad }}</td>                    
                     </tbody>
                     {%endfor%}
             </table>

@@ -195,13 +195,6 @@ tbody tr:hover {
     font-weight: bold;
 }
 
-.mrad-critical-success {
-    background-color: rgba(29, 249, 0, 0.7) !important;
-    color: white !important;
-    font-weight: bold;
-}
-
-
 .mrad-success {
     background-color: rgba(46, 204, 113, 0.7) !important;
     color: white !important;
