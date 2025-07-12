@@ -137,6 +137,18 @@ form {
 .table-responsive {
     width: 100%;
     overflow-x: auto;
+    -webkit-overflow-scrolling: touch;  /* Плавный скролл на iOS */
+    scrollbar-width: thin;  /* Тонкий скроллбар для Firefox */
+    scrollbar-color: rgba(0,0,0,0.3) transparent;  /* Цвет скроллбара */
+}
+
+.table-responsive::-webkit-scrollbar {
+    height: 6px;
+}
+
+.table-responsive::-webkit-scrollbar-thumb {
+    background-color: rgba(0,0,0,0.2);
+    border-radius: 3px;
 }
 table {
     width: 100%;
@@ -174,6 +186,21 @@ tbody tr:nth-child(even) {
 tbody tr:hover {
     background-color: rgba(52, 152, 219, 0.3);
 }
+
+.mrad-error {
+    background-color: rgba(231, 76, 60, 0.7) !important;
+    color: white !important;
+    font-weight: bold;
+}
+
+.mrad-success {
+    background-color: rgba(46, 204, 113, 0.7) !important;
+    color: white !important;
+    font-weight: bold;
+}
+
+
+
 @keyframes fadeInUp {
     from {
         opacity: 0;
@@ -278,7 +305,7 @@ tbody tr:hover {
     }
 }
 /* For mobile phones */
-@media (max-width: 480px) {
+@media (max-width: 650px) {
     body {
         padding: 0;
     }
@@ -291,7 +318,7 @@ tbody tr:hover {
         text-align: center;
     }
     .calculator-card, .history-card {
-        padding: 1rem;
+        padding: 15px;
     }
     h1 {
         font-size: 1.5rem;
@@ -304,5 +331,16 @@ tbody tr:hover {
     }
     .btn {
         width: 100%;
+        min-height: 48px;  /* Увеличиваем кликабельность кнопок */
+        font-size: 16px;
+        padding: 12px;
+    }
+    .form-group input {
+        padding: 12px;
+        font-size: 16px;
+        min-height: 48px;  /* Увеличиваем кликабельность */
+    }
+    .buttons {
+        gap: 10px;
     }
 }

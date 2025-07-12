@@ -4,13 +4,11 @@ from django.contrib.auth.models import User
 class CalculatorForm(forms.Form):
     target = forms.CharField(
         label='Размер мишени',
-        help_text='В метрах',
-        widget=forms.TextInput(attrs={'class': 'small-input'})
+        help_text='В метрах'
     )
     dist = forms.CharField(
         label='Дистанция до мишени',
-        help_text='от 100м до 1500м',
-        widget=forms.TextInput(attrs={'class': 'small-input'})
+        help_text='от 100м до 1500м'
     )
 
 

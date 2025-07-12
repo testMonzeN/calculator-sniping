@@ -11,27 +11,35 @@ def round_half_up(value, ndigits):
 
 
 class Calculator():
-    def __init__(self, target=200, dist=1000):
+    def __init__(self, target, dist):
         self.target = target
         self.dist = dist
 
     def resurt_one_try(self):
+        if not self.target or not self.dist:
+            return 0
+        
         try:
             value = ((-1 * float(self.target)) / (float(self.dist) / 100)) + 8
-            if 1 <= round_half_up(value, 2) <= 6:
+            if 1 <= round_half_up(value, 2) <= 6 and round_half_up(value, 2) != 0:
                 return round_half_up(value, 2)
             else:
-                return 0
+                return 'Вы не попали в допустимый диапазон'
         except:
             return 0
 
     def resurt_two_try(self):
-        return round_half_up(self.resurt_one_try() * 0.75, 2)
+        try:
+            return round_half_up(self.resurt_one_try() * 0.75, 2)
+        except:
+            return 'Вы не попали в допустимый диапазон'
     
 
     def resurt_three_try(self):
-        return round_half_up(self.resurt_one_try() * 0.5, 2)
-
+        try:
+            return round_half_up(self.resurt_one_try() * 0.5, 2)
+        except:
+            return 'Вы не попали в допустимый диапазон'
 
     def result_MRAD(self):
         try:
@@ -109,6 +117,8 @@ class CalculatorView(View):
                 sort_table_for_ip.save()
             
             recent_tables = TableIpAddressSort.objects.filter(ip=current_ip).order_by('-id')
+        else:
+            recent_tables = []
 
         return render(
             request, 'home/home.html', 
