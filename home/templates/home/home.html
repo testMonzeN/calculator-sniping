@@ -1,0 +1,58 @@
+{% extends "global/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <div class="calculator-card">
+        <h1>КАЛЬКУЛЯТОР ВЫЧИСЛЕНИЯ ОЧКОВ ЗА ПОПАДАНИЕ В КЛАССИЧЕСКОМ СНАЙПИНГЕ</h1>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="id_target">Цель (см):</label>
+                <input type="number" name="target" id="id_target" class="small-input">
+                <label for="id_target">ВАЖНО: от 0.2 до 0.7 МРАД</label>
+            </div>
+            <div class="form-group">
+                <label for="id_dist">Дистанция (м):</label>
+                <input type="number" name="dist" id="id_dist" class="small-input">
+                <label for="id_dist">ВАЖНО: от 100м до 1500м</label>
+            </div>
+            <div class="buttons">
+                <button type="submit" class="btn btn-primary" id="id_calculate">Рассчитать</button>
+                <button type="submit" name="clear" class="btn btn-danger">Очистить историю</button>
+            </div>
+        </form>
+    </div>
+
+    {% if recent_tables %}
+    <div class="history-card">
+        <h2>История расчетов</h2>
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Цель (см)</th>
+                        <th>Дистанция (м)</th>
+                        <th>1-й выстрел</th>
+                        <th>2-й выстрел</th>
+                        <th>3-й выстрел</th>
+                        <th>Цель (МРАД)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in recent_tables %}
+                    <tr>
+                        <td>{{ item.table.target }}</td>
+                        <td>{{ item.table.dist }}</td>
+                        <td {% if "Вы не попали" in item.table.first_try|stringformat:"s" %}class="mrad-error"{% else %}class="mrad-success"{% endif %}>{{ item.table.first_try }}</td>
+                        <td {% if "Вы не попали" in item.table.second_try|stringformat:"s" %}class="mrad-error"{% else %}class="mrad-success"{% endif %}>{{ item.table.second_try }}</td>
+                        <td {% if "Вы не попали" in item.table.third_try|stringformat:"s" %}class="mrad-error"{% else %}class="mrad-success"{% endif %}>{{ item.table.third_try }}</td>
+                        <td {% if item.table.mrad >= 0.2 and item.table.mrad <= 0.7 %}class="mrad-success"{% else %}class="mrad-critical-error"{% endif %}>{{ item.table.mrad }}</td>                    
+                    </tbody>
+                    {%endfor%}
+            </table>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
