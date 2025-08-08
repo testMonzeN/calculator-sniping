@@ -14,7 +14,7 @@ from google.analytics.data_v1beta.types import (
     RunReportRequest,
 )
 from google.oauth2 import service_account
-
+from calc.settings import BASE_DIR
 
 
 
@@ -140,7 +140,7 @@ class GoogleAnalyticsView():
             credentials = service_account.Credentials.from_service_account_info(service_account_info)
         else:
             # Fallback для локальной разработки
-            JSON_PATH = 'data/service.json'
+            JSON_PATH = str(BASE_DIR) + '/data/service.json'
             credentials = service_account.Credentials.from_service_account_file(JSON_PATH)
         client = BetaAnalyticsDataClient(credentials=credentials)
         
