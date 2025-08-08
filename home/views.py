@@ -121,9 +121,7 @@ class GoogleAnalyticsView():
         users = 0
         property_id = '499888015'
         
-        # Получаем данные из переменных окружения или файла (для локальной разработки)
         if os.getenv('GOOGLE_SERVICE_ACCOUNT_TYPE'):
-            # Используем переменные окружения
             service_account_info = {
                 "type": os.getenv('GOOGLE_SERVICE_ACCOUNT_TYPE'),
                 "project_id": os.getenv('GOOGLE_PROJECT_ID'),
@@ -139,7 +137,6 @@ class GoogleAnalyticsView():
             }
             credentials = service_account.Credentials.from_service_account_info(service_account_info)
         else:
-            # Fallback для локальной разработки
             JSON_PATH = str(BASE_DIR) + '/data/service.json'
             credentials = service_account.Credentials.from_service_account_file(JSON_PATH)
         client = BetaAnalyticsDataClient(credentials=credentials)
